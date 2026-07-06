@@ -233,10 +233,6 @@ body {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
-.note-form>.ql-toolbar.ql-snow:first-child {
-    display: none;
-}
-
 .ql-toolbar.ql-snow .ql-formats {
     padding: 0.4em 0.6em !important;
     border-radius: 12px;
