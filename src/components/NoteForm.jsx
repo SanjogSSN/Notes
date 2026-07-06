@@ -1,27 +1,59 @@
 // src/components/NoteForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Quill from 'quill';
 import { noteStore } from '../store/noteStore';
 
 const NoteForm = () => {
-    const [text, setText] = useState('');
+    const [content, setContent] = useState('');
+    const editorContainerRef = useRef(null);
+    const quillRef = useRef(null);
+
+    useEffect(() => {
+        // if (!editorContainerRef.current || quillRef.current) return;
+
+        const container = editorContainerRef.current;
+
+        quillRef.current = new Quill(container, {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link'],
+                    ['clean']
+                ]
+            },
+            theme: 'snow'
+        });
+
+        quillRef.current.on('text-change', () => {
+            setContent(quillRef.current.root.innerHTML);
+        });
+
+        return () => {
+            if (quillRef.current) {
+                quillRef.current.off('text-change');
+                quillRef.current = null;
+            }
+            if (editorContainerRef.current) {
+                editorContainerRef.current.innerHTML = '';
+            }
+        };
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!text.trim()) return;
-        noteStore.addNote(text);
-        setText('');
+        const plain = content.replace(/<(.|\n)*?>/g, '').trim();
+        if (!plain) return;
+        noteStore.addNote(content);
+        setContent('');
+        if (quillRef.current) {
+            quillRef.current.setText('');
+        }
     };
 
     return (
         <form onSubmit={handleSubmit} className="note-form">
-            <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Write a note..."
-                autoFocus
-                rows={3}
-                className="note-textarea"
-            />
+            <div className="note-editor" ref={editorContainerRef} />
             <div className="note-form-actions">
                 <button type="submit" className="note-form-btn">
                     Add

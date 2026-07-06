@@ -13,7 +13,7 @@ A beautiful, modern, and responsive notes app built with React and Vite.
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher recommended)
+- Node.js (v24.15.0 recommended)
 - npm or yarn
 
 ### Installation

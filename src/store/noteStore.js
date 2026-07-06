@@ -14,6 +14,9 @@ export const noteStore = proxy({
         };
         noteStore.notes.push(newNote);
     },
+    updateNote(id, newText) {
+        noteStore.notes = noteStore.notes.map(n => n.id === id ? { ...n, text: newText } : n);
+    },
     deleteNote(id) {
         noteStore.notes = noteStore.notes.filter(note => note.id !== id);
     }

@@ -13,7 +13,7 @@ body {
     letter-spacing: 0.01em;
 }
 
-.note-item button {
+/* .note-item button {
     background: #f22;
     color: #fff;
     border: none;
@@ -28,13 +28,11 @@ body {
     justify-content: center;
     border: 2px solid #fff0;
     width: 65px;
-}
+} */
 
 
 form {
-    display: flex;
-    gap: 0.7rem;
-    justify-content: center;
+    /* gap: 0.7rem; */
     margin-bottom: 0.5rem;
 }
 
@@ -70,15 +68,13 @@ form button {
     letter-spacing: 0.01em;
 }
 
-form button:hover {
+/* form button:hover {
     background: linear-gradient(90deg, #4338ca 60%, #6366f1 100%);
     transform: scale(1.09);
     box-shadow: 0 6px 24px rgba(99, 102, 241, 0.19);
-}
+} */
 
 .logo {
-    height: 6em;
-    padding: 1.5em;
     will-change: filter;
     transition: filter 300ms;
 }
