@@ -9,9 +9,11 @@ const NoteForm = () => {
     const quillRef = useRef(null);
 
     useEffect(() => {
-        if (!editorContainerRef.current) return;
+        // if (!editorContainerRef.current || quillRef.current) return;
 
-        quillRef.current = new Quill(editorContainerRef.current, {
+        const container = editorContainerRef.current;
+
+        quillRef.current = new Quill(container, {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline'],

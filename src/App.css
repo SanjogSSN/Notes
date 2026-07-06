@@ -68,7 +68,6 @@ body {
 }
 
 #root {
-    width: min(100%, 1360px);
     margin: 0 auto;
     padding: 36px 24px 60px;
 }
@@ -165,22 +164,35 @@ body {
 
 .note-form {
     display: grid;
-    gap: 18px;
+    /* gap: 18px; */
     width: 100%;
     min-width: 0;
 }
 
 .note-editor {
+    display: block;
     width: 100%;
     min-width: 0;
     max-width: 100%;
 }
 
-.note-editor .ql-toolbar,
+.note-editor > .ql-toolbar,
+.note-editor > .ql-container {
+    display: block;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0;
+    border-radius: 18px;
+}
+
+.note-editor .ql-toolbar {
+    justify-content: flex-start;
+}
+
 .note-editor .ql-container {
     width: 100% !important;
-    max-width: 100% !important;
-    border-radius: 18px;
 }
 
 .note-editor .ql-toolbar {
@@ -189,6 +201,8 @@ body {
     border: 1px solid var(--border);
     border-bottom: none;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .note-editor .ql-toolbar .ql-formats {
@@ -200,7 +214,7 @@ body {
 .note-editor .ql-toolbar button,
 .note-editor .ql-toolbar .ql-picker {
     border: none !important;
-    background: var(--bg-button) !important;
+    background: transparent !important;
     color: var(--text-primary) !important;
     border-radius: 12px !important;
     padding: 8px 10px !important;
@@ -219,6 +233,15 @@ body {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
+.note-form>.ql-toolbar.ql-snow:first-child {
+    display: none;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+    padding: 0.4em 0.6em !important;
+    border-radius: 12px;
+}
+
 .note-editor .ql-editor {
     min-height: 240px;
     padding: 22px 20px;
@@ -235,6 +258,7 @@ body {
 .note-form-actions {
     display: flex;
     justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .note-form-btn {
@@ -251,8 +275,9 @@ body {
 }
 
 .note-form-btn:hover {
-    transform: translateY(-1px);
-    opacity: 0.95;
+    background: linear-gradient(90deg, #4338ca 60%, #6366f1 100%);
+    transform: scale(1.09);
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.19);
 }
 
 .notes-controls {
@@ -263,7 +288,7 @@ body {
 }
 
 .search-input {
-    width: 100%;
+    /* width: 100%; */
     min-width: 0;
     padding: 16px 18px;
     border-radius: 18px;
@@ -308,7 +333,7 @@ body {
 
 .note-edit {
     display: grid;
-    gap: 18px;
+    /* gap: 18px; */
     width: 100%;
     min-width: 0;
 }
@@ -340,10 +365,10 @@ body {
     padding: 0 18px;
 }
 
-.note-actions button:hover,
-.note-edit-actions button:hover {
-    background: var(--bg-button-hover);
-    transform: translateY(-1px);
+.note-edit-actions .note-form-btn {
+    background: linear-gradient(135deg, #7c83f7, #5b63f6);
+    color: white;
+    box-shadow: 0 20px 40px rgba(76, 69, 183, 0.22);
 }
 
 .note-actions .delete,
@@ -374,14 +399,9 @@ body {
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 400;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.note-controls button:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-1px);
 }
 
 .note-controls button.delete {
@@ -399,6 +419,7 @@ body {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
+    margin-top: 10px;
 }
 
 .note-edit-actions .note-form-btn {
@@ -427,6 +448,7 @@ body {
     .app-header {
         grid-template-columns: 1fr;
         text-align: left;
+        padding: 24px;
     }
 
     .notes-controls {
@@ -439,5 +461,47 @@ body {
 
     .note-item {
         padding: 20px;
+    }
+
+    .note-form {
+        gap: 14px;
+    }
+
+    .note-editor .ql-toolbar {
+        padding: 10px 12px;
+    }
+
+    .note-editor .ql-toolbar .ql-formats {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .note-editor .ql-editor {
+        min-height: 200px;
+        padding: 18px 16px;
+    }
+
+    .note-form-actions {
+        justify-content: stretch;
+    }
+
+    .note-form-btn,
+    .note-actions button,
+    .note-edit-actions button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .note-actions,
+    .note-edit-actions {
+        justify-content: stretch;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    #root {
+        padding: 24px 16px 40px;
     }
 }

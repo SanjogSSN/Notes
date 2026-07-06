@@ -14,9 +14,11 @@ const NoteItem = ({ note }) => {
     }, [note.text]);
 
     useEffect(() => {
-        if (!editing || !editorContainerRef.current) return;
+        if (!editing || !editorContainerRef.current || quillRef.current) return;
 
-        quillRef.current = new Quill(editorContainerRef.current, {
+        const container = editorContainerRef.current;
+
+        quillRef.current = new Quill(container, {
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline'],
@@ -58,8 +60,8 @@ const NoteItem = ({ note }) => {
                 <div className="note-edit">
                     <div ref={editorContainerRef} className="note-editor" />
                     <div className="note-edit-actions">
-                        <button onClick={handleSave} className="note-form-btn">Save</button>
-                        <button onClick={() => { setValue(note.text); setEditing(false); }} className="note-form-btn cancel-btn">Cancel</button>
+                        <button type="button" onClick={handleSave} className="note-form-btn">Save</button>
+                        <button type="button" onClick={() => { setValue(note.text); setEditing(false); }} className="note-form-btn cancel-btn">Cancel</button>
                     </div>
                 </div>
             ) : (
